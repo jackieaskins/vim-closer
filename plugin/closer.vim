@@ -13,6 +13,9 @@ augroup closer
   au FileType c,cpp,css,go,java,less,objc,puppet,python,ruby,rust,scss,sh,stylus,xdefaults,zsh,terraform
     \ let b:closer = 1 |
     \ let b:closer_flags = '([{'
+  au FileType json
+    \ let b:closer = 1 |
+    \ let b:closer_flags = '[{'
 
   autocmd FileType * call closer#enable()
 augroup END
