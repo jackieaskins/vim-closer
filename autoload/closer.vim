@@ -15,12 +15,14 @@ function! closer#enable()
   let b:closer = 1
   let oldmap = maparg('<CR>', 'i')
 
-  if oldmap =~# 'CloserClose'
-    " already mapped. maybe the user was playing with `set ft`
-  elseif oldmap != ""
-    exe "imap <CR> ".oldmap."<Plug>CloserClose"
-  else
-    imap  <CR> <CR><Plug>CloserClose
+  if !exists('g:closer_no_mappings')
+	  if oldmap =~# 'CloserClose'
+		" already mapped. maybe the user was playing with `set ft`
+	  elseif oldmap != ""
+		exe "imap <CR> ".oldmap."<Plug>CloserClose"
+	  else
+		imap  <CR> <CR><Plug>CloserClose
+	  endif
   endif
 endfunction
 
@@ -83,7 +85,10 @@ function! s:use_semicolon(ln)
   " Don't add semicolons for lines matching `no_semi`.
   " This allows `function(){ .. }` and `class X { .. }` to not get semicolons.
   let line = getline(a:ln)
+  let topline = getline(a:ln - 1)
   if b:closer_no_semi != '0' && match(line, b:closer_no_semi) > -1
+    return ''
+  elseif b:closer_no_semi != '0' && b:closer_semi_check_top != '0' && match(topline, b:closer_no_semi) > -1
     return ''
   endif
 
