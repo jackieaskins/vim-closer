@@ -6,7 +6,7 @@ augroup closer
     \ let b:closer_semi_ctx = 0 |
     \ let b:closer_semi_check_top = 0
 
-  au FileType javascript,javascript.jsx,vue,typescript,typescript.tsx,typescript.jsx,javascriptreact,typescriptreact
+  au FileType javascript,javascript.jsx,javascriptreact,vue,typescript,typescriptreact
     \ let b:closer = 1 |
     \ let b:closer_flags = '([{;' |
     \ let b:closer_no_semi = '\(function\|class\|if\|else\|while\|try\|catch\|interface\|enum\|for\)' |
